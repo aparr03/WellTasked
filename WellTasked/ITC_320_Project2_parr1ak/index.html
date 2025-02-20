@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Home - WellTasked</title>
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 20px;
+        }
+        #welcome-banner {
+            display: none;
+            color: white;
+        }
+        #login-label {
+            display: none;
+            color: white;
+            cursor: pointer;
+        }
+        .section {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .section-light {
+            background-color: #f9f9f9;
+        }
+        .section-dark {
+            background-color: #333;
+            color: white;
+        }
+        .section img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .section h3 {
+            margin-top: 0;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WellTasked</h1>
+        <div id="welcome-banner">
+            <p id="welcome-text"></p>
+        </div>
+        <div id="login-label" onclick="window.location.href='profile_page.html'">
+            <p>Login to your profile</p>
+        </div>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="profile_page.html">Profile</a>
+        <a href="goals_page.html">Goals</a>
+        <a href="calendar_page.html">Calendar</a>
+        <a href="about_page.html">About</a>
+    </nav>
+    <main>
+        <section class="section section-light">
+            <h3>Welcome to WellTasked</h3>
+            <p>WellTasked is your ultimate task/goal management app designed to help you stay organized and productive. Whether you're managing personal tasks, academic assignments, or professional projects, WellTasked has got you covered.</p>
+        </section>
+        <section class="section section-dark">
+            <h3>Features</h3>
+            <p>WellTasked offers a range of features to streamline your task management process:</p>
+            <ul>
+                <li>Task creation and categorization</li>
+                <li>Deadline tracking and reminders</li>
+                <li>Progress monitoring</li>
+                <li>Friend Accounts</li>
+                <li>In-Game Rewards</li>
+            </ul>
+        </section>
+        <section class="section section-light">
+            <h3>Why Choose WellTasked?</h3>
+            <p>Our app is designed with simplicity and efficiency in mind. With WellTasked, you can easily prioritize your tasks, set achievable goals, and track your progress. Our intuitive interface ensures that you spend less time managing tasks and more time completing them.</p>
+            
+        </section>
+        <section class="section section-dark">
+            <h3>Get Started</h3>
+            <p>Ready to take control of your life? Create an account and experience the benefits of WellTasked. Join our community of productive individuals and start achieving your goals.</p>
+            
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 WellTasked</p>
+    </footer>
+    <script>
+        function showWelcomeMessage(username) {
+            const welcomeBanner = document.getElementById('welcome-banner');
+            const welcomeText = document.getElementById('welcome-text');
+            welcomeText.textContent = `Welcome to WellTasked, ${username}`;
+            welcomeBanner.style.display = 'block';
+        }
+
+        function showLoginLabel() {
+            const loginLabel = document.getElementById('login-label');
+            loginLabel.style.display = 'block';
+        }
+
+        function checkLoginStatus() {
+            fetch('/check-login', {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    showWelcomeMessage(data.username);
+                } else {
+                    showLoginLabel();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking login status:', error);
+            });
+        }
+
+        window.onload = checkLoginStatus;
+    </script>
+</body>
+</html>

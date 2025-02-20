@@ -1,0 +1,21 @@
+{
+  "name": "itc_320_project2_parr1ak",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "fs": "0.0.1-security",
+    "http": "^0.0.1-security",
+    "path": "^0.12.7",
+    "sqlite3": "^5.0.2",
+    "formidable": "^2.0.1",
+    "ws": "^8.5.0"
+  }
+}
